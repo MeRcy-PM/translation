@@ -54,8 +54,9 @@ QUIC实现了流和连接级别的流量控制，与HTTP/2的流量控制类似�
 
 警告：QUIC当前通过HTTP/2 HPACK[[HPACK](https://tools.ietf.org/html/draft-ietf-httpbis-header-compression-06)]压缩HTTP头，这会导致HTTP头部帧的HOL。  
 
-注：消除了HOL可能是因为流是QUIC的内容，可以对流进行区分。而TCP不识别载荷的内容。
+**注：消除了HOL可能是因为流是QUIC的内容，可以对流进行区分。而TCP不识别载荷的内容。**
 
 ## 3.5 可靠及加密的头部和载荷  ##
 
-由于TCP头部在信道上是明文传输且未经过验证的，因此导致了许多注入和头部伪造的问题，比如接收窗口伪造和序列号重写的问题。
+由于TCP头部在信道上是明文传输且未经过验证的，因此导致了许多注入和头部伪造的问题，比如接收窗口伪造和序列号重写的问题。当其中的一些攻击激活时，其他用于网络中的一些中间件的类似机制有时正在透明的提高TCP性能。然而，即使这些中间件正在增强TCP性能，但是仍然限制着传输协议的可进化性(原文：However, even "performance-enhancing" middleboxes still effectively limit the evolvability of the transport protocol，个人理解为TCP性能的演进)，正如从MPTCP(multi-path tcp)及其后续的部署问题。  
+**注：个人理解，当某些攻击生效时，可能会破坏TCP的公平性，甚至会占满整个机器上的带宽。如伪造TCP连接，伪造ACK，使TCP认为链路状态较好，并不断提升该链路性能，导致其他链路质量下降。**    
