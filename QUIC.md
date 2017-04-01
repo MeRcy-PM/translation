@@ -563,3 +563,57 @@ QUIC握手有责任为QUIC连接协商一些传输参数。
 
 ## 8. QUIC错误码
 
+QUIC错误与错误码映射关系定义在src/net/quic/quic\_protocol.h中。  
+
+QUIC\_NO\_ERROR: 无错误。这个值对于RST\_STREAM分片和CONNECTION\_CLOSE分片无效。  
+
+QUIC\_STREAM\_DATA\_AFTER\_TERMINATION: 在FIN或者RESET状态之后仍然有数据到达。  
+
+QUIC\_SERVER\_ERROR\_PROCESSING\_STREAM: 服务端处理流数据异常。  
+
+QUIC\_MULTIPLE\_TERMINATION\_OFFSETS: 发送端的某个流收到了两个偏移不匹配的FIN或者RESET。  
+
+QUIC\_BAD\_APPLICATION\_PAYLOAD: 发送端收到了损坏的应用层数据。  
+
+QUIC\_INVALID\_PACKET\_HEADER: 发送端收到了异常的包头。  
+
+QUIC\_INVALID\_FRAME\_DATA: 发送端收到一个分片数据，更多的细节的错误码会优先选择。  
+
+QUIC\_INVALID\_FEC\_DATA: 异常的FEC数据。  
+
+QUIC\_INVALID\_RST\_STREAM\_DATA: 流RST数据异常。  
+
+QUIC\_INVALID\_CONNECTION\_CLOSE\_DATA: 连接关闭数据异常。  
+
+QUIC\_INVALID\_ACK\_DATA: Ack数据异常。  
+
+QUIC\_DECRYPTION\_FAILURE: 解密错误。  
+
+QUIC\_ENCRYPTION\_FAILURE: 加密错误。  
+
+QUIC\_PACKET\_TOO\_LARGE: 包大小超过最大值。  
+
+QUIC\_PACKET\_FOR\_NONEXISTENT\_STREAM: 数据发送到一个不存在的流。  
+
+QUIC\_CLIENT\_GOING\_AWAY: 客户端即将离开(浏览器关闭等)。  
+
+QUIC\_SERVER\_GOING\_AWAY: 服务端即将离开(重启等)。  
+
+QUIC\_INVALID\_STREAM\_ID: 无效的流标识符。  
+
+QUIC\_TOO\_MANY\_OPEN\_STREAMS: 打开的流过多。  
+
+QUIC\_CONNECTION\_TIMED\_OUT: 达到预协商(或者默认)的超时时间。  
+
+QUIC\_CRYPTO\_TAGS\_OUT\_OF\_ORDER: 握手信息中包含了乱序的标签。  
+
+QUIC\_CRYPTO\_TOO\_MANY\_ENTRIES: 握手信息中包含过多的实例。  
+
+QUIC\_CRYPTO\_INVALID\_VALUE\_LENGTH: 握手信息中包含无效的长度值。  
+
+QUIC\_CRYPTO\_MESSAGE\_AFTER\_HANDSHAKE\_COMPLETE: 握手完成后收到一个加密信息。  
+
+QUIC\_INVALID\_CRYPTO\_MESSAGE\_TYPE: 接收到一个非法标签的加密信息。  
+
+QUIC\_SEQUENCE\_NUMBER\_LIMIT\_REACHED: 一个附加数据可能导致包号重用。  
+
